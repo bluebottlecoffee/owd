@@ -6,21 +6,21 @@ module OWD
 
     def initialize(xml, timeout_seconds)
       @xml = xml
-      @timeout_seconds = timeout_seconds
+      @timeout_seconds = timeout_seconds.to_i
     end
 
     def perform
       uri = URI.parse(ENDPOINT)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.read_timeout = timeout_seconds
-      http.open_timeout = timeout_seconds
       http.use_ssl = (uri.scheme == 'https')
 
       request = Net::HTTP::Post.new(uri.request_uri)
       request.body = xml
       request["Content-Type"] = "text/xml"
 
-      parse_response(http.request(request))
+      Timeout::timeout(timeout_seconds) {
+        parse_response(http.request(request))
+      }
     end
 
     private
