@@ -6,11 +6,12 @@ module OWD
   class Client
     API_VERSION = '1.9'
 
-    attr_reader :client_id, :client_authorization, :testing
+    attr_reader :client_id, :client_authorization, :timeout_seconds, :testing
 
     def initialize opts = {}
       @client_id            = opts[:client_id]
       @client_authorization = opts[:client_authorization]
+      @timeout_seconds      = opts[:timeout_seconds] || 15
       @testing              = opts[:testing] ? 'TRUE' : 'FALSE'
     end
 
@@ -32,7 +33,7 @@ module OWD
                          :client_id            => @client_id,
                          :client_authorization => @client_authorization,
                          :testing              => @testing).build(opts)
-      Request.new(xml).perform
+      Request.new(xml, @timeout_seconds).perform
     end
 
     def symbol_to_class_name sym

@@ -21,4 +21,14 @@ describe OWD::Client do
     mock_order_status.verify
     mock_request.verify
   end
+
+  it 'allows has a default timeout of 15 seconds' do
+    assert_equal @client.timeout_seconds, 15
+  end
+
+  it 'allows the timeout in seconds to be configured' do
+    @client = OWD::Client.new(client_id: 123, client_authorization: 'abc', timeout_seconds: 1)
+    assert_equal @client.timeout_seconds, 1
+  end
+
 end
