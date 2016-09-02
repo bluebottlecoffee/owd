@@ -13,6 +13,7 @@ module OWD
       uri = URI.parse(ENDPOINT)
       http = Net::HTTP.new(uri.host, uri.port)
       http.read_timeout = timeout_seconds
+      http.open_timeout = timeout_seconds
       http.use_ssl = (uri.scheme == 'https')
 
       request = Net::HTTP::Post.new(uri.request_uri)
