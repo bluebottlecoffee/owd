@@ -5,7 +5,7 @@
 The owd gem is a simple client for One World Direct's XML API.
 
 ```ruby
-client = OWD::Client.new(:client_id => 123, :client_authorization => 'XXXXXXXXXX')
+client = OWD::Client.new(client_id: 123, client_authorization: 'XXXXXXXXXX', timeout_seconds: 15)
 client.api.inventory_create(:sku => 'MY-FANCY-SKU')
 client.api.order_status({ order_reference: 666 })
 ```

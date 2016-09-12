@@ -2,10 +2,11 @@ module OWD
   class Request
     ENDPOINT = 'https://secure.owd.com/webapps/api/api.jsp'
 
-    attr_reader :xml
+    attr_reader :xml, :timeout_seconds
 
-    def initialize(xml)
+    def initialize(xml, timeout_seconds)
       @xml = xml
+      @timeout_seconds = timeout_seconds.to_i
     end
 
     def perform
@@ -17,7 +18,9 @@ module OWD
       request.body = xml
       request["Content-Type"] = "text/xml"
 
-      parse_response(http.request(request))
+      Timeout::timeout(timeout_seconds) {
+        parse_response(http.request(request))
+      }
     end
 
     private
