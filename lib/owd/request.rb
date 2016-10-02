@@ -31,6 +31,9 @@ module OWD
 
     def request_parameters
       request = Net::HTTP::Post.new(uri.request_uri)
+      request.open_timeout = timeout_seconds
+      request.read_timeout = timeout_seconds
+      request.ssl_timeout = timeout_seconds
       request.body = xml
       request["Content-Type"] = "text/xml"
       request
