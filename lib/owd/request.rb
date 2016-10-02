@@ -25,6 +25,7 @@ module OWD
       http.use_ssl = (uri.scheme == 'https')
       http.open_timeout = timeout_seconds
       http.read_timeout = timeout_seconds
+      http.ssl_timeout = timeout_seconds
       http
     end
 
