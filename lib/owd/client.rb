@@ -6,12 +6,14 @@ module OWD
   class Client
     API_VERSION = '1.9'
 
-    attr_reader :client_id, :client_authorization, :testing
+    attr_reader :client_id, :client_authorization, :testing, :environment
 
     def initialize opts = {}
-      @client_id            = opts[:client_id]
-      @client_authorization = opts[:client_authorization]
-      @testing              = opts[:testing] ? 'TRUE' : 'FALSE'
+      @client_id            = opts[:client_id].presence            || OWD.configuration.client_id
+      @client_authorization = opts[:client_authorization].presence || OWD.configuration.client_authorization
+      @environment          = opts[:environment]                   || OWD.configuration.environment
+      @testing              = opts[:testing]                       || OWD.configuration.testing
+      @testing              = @testing ? 'TRUE' : 'FALSE'
     end
 
     def api
@@ -32,7 +34,7 @@ module OWD
                          :client_id            => @client_id,
                          :client_authorization => @client_authorization,
                          :testing              => @testing).build(opts)
-      Request.new(xml).perform
+      Request.new(xml, @environment).perform
     end
 
     def symbol_to_class_name sym

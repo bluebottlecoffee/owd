@@ -5,7 +5,7 @@ describe OWD::Client do
     @client = OWD::Client.new(client_id: 123, client_authorization: 'abc')
   end
 
-  it 'gives acess to order_status' do
+  it 'gives access to order_status' do
     mock_order_status = MiniTest::Mock.new
     mock_order_status.expect(:build, '', [{foo: 'bar'}])
 
