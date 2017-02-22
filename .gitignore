@@ -6,3 +6,5 @@
 /Gemfile.lock
 /*.gem
 tags
+.ruby-gemset
+.ruby-version
