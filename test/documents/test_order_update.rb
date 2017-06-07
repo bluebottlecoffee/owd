@@ -21,7 +21,16 @@ describe OWD::OrderUpdate do
         email: "email@gmail.com",
         zip: "94607",
         country: "US",
-        phone: "555-5555"
+        phone: "555-5555",
+        line_items: [
+          {
+            part_reference: 'SKUTest1',
+            description: 'Some stuff that sounds good',
+            requested: '3',
+            cost: '4.99',
+            line_number: '88934'
+          }
+        ]
       ), <<-XML
         <?xml version="1.0" encoding="UTF-8"?>
         <OWD_API_REQUEST>
@@ -34,6 +43,9 @@ describe OWD::OrderUpdate do
             <SHIP_COUNTRY>US</SHIP_COUNTRY>
             <SHIP_PHONE>555-5555</SHIP_PHONE>
             <SHIP_EMAIL>email@gmail.com</SHIP_EMAIL>
+            <LINE_ITEMS>
+              <LINE_ITEM part_reference='SKUTest1' description='Some stuff that sounds good' requested='3' cost='4.99' line_number='88934'/>
+            </LINE_ITEMS>
           </OWD_ORDER_UPDATE_REQUEST>
         </OWD_API_REQUEST>
       XML

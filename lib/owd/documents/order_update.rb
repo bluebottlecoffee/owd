@@ -14,6 +14,12 @@ module OWD
         doc.SHIP_COUNTRY          opts[:country]        if opts[:country]
         doc.SHIP_PHONE            opts[:phone]          if opts[:phone]
         doc.SHIP_EMAIL            opts[:email]          if opts[:email]
+
+        doc.tag!(:LINE_ITEMS) do
+          opts[:line_items].each do |line_item|
+            doc.LINE_ITEM line_item
+          end if opts[:line_items]
+        end
       end
     end
   end
