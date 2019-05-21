@@ -3,8 +3,8 @@ require "./test/test_helper"
 describe OWD::Request do
   describe 'endpoint' do
     describe 'when environment == "production"' do
-      it 'return https://secure.owd.com/webapps/api/api.jsp' do
-        assert_equal OWD::Request.new('xml', 'production').endpoint, 'https://secure.owd.com/webapps/api/api.jsp'
+      it 'return https://secure.owd.com/api/api.jsp' do
+        assert_equal OWD::Request.new('xml', 'production').endpoint, 'https://secure.owd.com/api/api.jsp'
       end
     end
 

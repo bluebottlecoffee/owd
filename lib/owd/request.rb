@@ -1,6 +1,6 @@
 module OWD
   class Request
-    ENDPOINT = 'https://secure.owd.com/webapps/api/api.jsp'
+    ENDPOINT = 'https://secure.owd.com/api/api.jsp'
     STAGING_ENDPOINT = 'https://secure.owd.com/test/api/api.jsp'
 
     attr_reader :xml, :environment
